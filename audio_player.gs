@@ -1,17 +1,6 @@
 function audioList() {
   const folderId = 'folderGDriveId'
-  var fileList = getFileList(folderId);
-  return fileList;
-}
-
-function doGet() {
-  return HtmlService
-  .createTemplateFromFile('index')
-  .evaluate()
-  .setTitle('Alpha');
-}
-
-function getFileList(folderId) {
+  
   var fileFolder = DriveApp.getFolderById(folderId);
   var files = fileFolder.getFilesByType('audio/mpeg');
   var fileList = [];
@@ -30,3 +19,9 @@ function getFileList(folderId) {
   return fileList;
 }
 
+function doGet() {
+  return HtmlService
+  .createTemplateFromFile('index')
+  .evaluate()
+  .setTitle('Alpha');
+}
