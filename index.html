@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <base target="_top">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-  <div id="audio-title"></div>
+<head>
+  <base target="_top">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="audio-title"></div>
   <audio id="player" onended="audio_end()" controls>
-  <source id="audio-source" src="fileGDriveUrl" type="audio/mpeg">
+    <source id="audio-source" src="fileGDriveUrl" type="audio/mpeg">
   </audio>
-  <? var data = audioList(); ?>
-  <div>
+<? var data = audioList(); ?>
+<div>
   <? for (var i = 0; i < data.length; i++) { ?>
   <div class="audio-item" id="<?= data[i].id ?>"><?= data[i].name?></div>
   <? } ?>
-  </div>
-  <script>
+</div>
+<script>
   function switch_audio(id, name) {
-  var sourceUrl = "https://drive.google.com/uc?export=download&id=" + id;
-  var audio = $("#player");
-  $("#audio-source").attr("src", sourceUrl);
-  audio[0].pause();
-  audio[0].load();
-  audio[0].oncanplaythrough = audio[0].play();
-  $("#audio-title").html(name);
+    var sourceUrl = "https://drive.google.com/uc?export=download&id=" + id;
+    var audio = $("#player");
+    $("#audio-source").attr("src", sourceUrl);
+    audio[0].pause();
+    audio[0].load();
+    audio[0].oncanplaythrough = audio[0].play();
+    $("#audio-title").html(name);
   }
   
   $(".audio-item").on("click", function(){
-  var id = $(this).attr('id');
-  var name =$(this).text();
-  switch_audio(id, name);
+    var id = $(this).attr('id');
+    var name =$(this).text();
+    switch_audio(id, name);
   });
   
   var audio_index = 0;
   
   function audio_end() {
-  audio_index++;
+    audio_index++;
 
-  var elements = $(".audio-item");
-  var audio_counts = elements.length;
+    var elements = $(".audio-item");
+    var audio_counts = elements.length;
 
-  if (audio_index >= audio_counts) {
-  audio_index = 0;
-  }
+    if (audio_index >= audio_counts) {
+      audio_index = 0;
+    }
 
-  var id = $(elements[audio_index]).attr('id');
-  var name =$(elements[audio_index]).text();
-  switch_audio(id, name);
+    var id = $(elements[audio_index]).attr('id');
+    var name =$(elements[audio_index]).text();
+    switch_audio(id, name);
   
   }; 
-  </script>
-  </body>
+</script>
+</body>
 </html>
 
